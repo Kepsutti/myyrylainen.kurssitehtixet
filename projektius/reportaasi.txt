@@ -1,0 +1,10 @@
+Project report (game server programming course)
+
+I still don't have a lot of confidence in my server programming skills, so I wanted to make a project that would have a somewhat similar structure to the final version of the implementation we've built during the assignments. I ended up with a sort of admin interface for a dog show where the Dog objects have, among other usual features, their trophy history included as a list. Trophies are also created as objects.
+
+When a new trophy is created, it is first made sure that the NewTrophy object has been given a valid rank of either gold, silver or bronze. Otherwise the trophy will not be created. Next, the object is given for the CreateTrophy methods, where the MongoDbRepository checks that the dog who is to receive the trophy has passed a health check. In the case of no verified health check the repository throws a custom system exception called HealthCheckValidation, and the trophy fails to be added to the TrophyHistory list of the Dog in question.
+
+There's also a custom method for retrieving the top dog with the most trophies in their history. Sending a get request to the localhost address api/dog/lead finds the dog with the longest TrophyHistory list and returns the dog's information.
+
+Another custom method called GetAllBySex returns a list of all registered dogs by given sex, which is indicated by integer 0 or 1 for male or female. This method can be accessed via the localhost address api/dogs?sex={sex}
+Likewise, you can send a get request by the name of the dog through api/dogs/{name}
